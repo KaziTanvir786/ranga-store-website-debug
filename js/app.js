@@ -16,6 +16,7 @@ const showProducts = (products) => {
     div.classList.add("product");
     const avgRating = product.rating.rate;
     let ratingHtml = '';
+    //star printing
     if (avgRating === 5) {
       ratingHtml = `
         <i class="fas fa-star"> &nbsp </i>
@@ -107,7 +108,7 @@ const showProducts = (products) => {
         <i class="far fa-star"> &nbsp </i>
       `;
     }
-
+    //card innerHTML
     div.innerHTML = `
     <div class="card h-100">
     <img style="height: 180px;" src=${image} class="card-img-top w-50 mx-auto mt-5" alt="Book image">
@@ -197,7 +198,7 @@ const updateTotal = () => {
     parseFloat(document.getElementById('total-tax').innerText);
   document.getElementById("total").innerText = grandTotal.toFixed(2);
 };
-
+//buy now modal
 const prepareBuyNowModal = () => {
   const modalDiv = document.getElementById('modalDiv');
   const totalPrice = document.getElementById('total').innerText;
@@ -232,6 +233,7 @@ const prepareBuyNowModal = () => {
   `;
   }
 }
+//product details modal
 const productDetails = productId => {
   const url = `https://raw.githubusercontent.com/ProgrammingHero1/ranga-store-api/main/ranga-api.json?fbclid=IwAR3uuQNUI7kuCXeYspQyu_x4WZM9PPFYY8sty5KRl1bViGZT4PWYdyBn3T4`;
   fetch(url)
