@@ -15,7 +15,7 @@ const showProducts = (products) => {
     const div = document.createElement("div");
     div.classList.add("product");
     const avgRating = product.rating.rate;
-    ratingHtml = '';
+    let ratingHtml = '';
     if (avgRating === 5) {
       ratingHtml = `
         <i class="fas fa-star"> &nbsp </i>
@@ -109,18 +109,19 @@ const showProducts = (products) => {
     }
 
     div.innerHTML = `
-    <div class="card h-100">
+    <div class="card h-100" style="background-color: whitesmoke;">
     <img style="height: 180px;" src=${image} class="card-img-top w-50 mx-auto mt-5" alt="Book image">
     <div class="card-body">
       <div>
-        <p style="max-width: 300px;" data-bs-toggle="tooltip" title="${product.title}" class="card-title text-success overflow-hidden text-truncate">${product.title}
-      </p>
-      <hr>
+        <h5 data-bs-toggle="tooltip" title="${product.title}" class="line-clamp card-title text-success">${product.title}
+        </h5>
       </div>
-      <p class="card-text">
-        <strong>Category:</strong>
-        ${product.category} <br>
-        <strong>Price:</strong> $${product.price}
+      <div class="card-text">
+        <small class="text-secondary">Category: ${product.category}</small><br>
+        <div class="d-flex my-2">
+          <p class="me-1"><strong>Price:</strong></p>
+          <h3 class="ms-1">$${product.price}</h3>
+        </div>
         <div class="d-flex justify-content-between align-items-center">
           <div id="stars" class="d-flex align-items-center text-warning">
             ${ratingHtml} 
@@ -130,9 +131,9 @@ const showProducts = (products) => {
             <sub class="text-secondary">/ 5</sub>
           </div>
         </div>
-        Total Ratings: ${product.rating.count} <br>
-      </p>
-      <div class="d-flex justify-content-between">
+        <span class="text-secondary">Total Ratings: ${product.rating.count}</span> <br>
+      </div>
+      <div class="d-flex justify-content-between mt-3">
       <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="card-button buy-now btn btn-outline-success">Add to cart</button>
       <button id="details-btn" class="card-button btn btn-outline-warning">Details</button>
       </div>

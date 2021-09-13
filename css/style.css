@@ -1,13 +1,21 @@
 body {
   overflow-x: hidden;
   font-family: "Montserrat", sans-serif;
+  background-color: #2e3a44
 }
 .card-button{
   width: 110px;
 }
+
+.line-clamp {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
+}
 .cart {
   width: 300px;
-  background-color: white;
+  background-color: rgb(235, 235, 235);
   padding: 10px;
   box-shadow: 5px 5px 20px gray;
   border-radius: 5px;

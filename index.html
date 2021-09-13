@@ -17,11 +17,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet" />
 </head>
 
-<body class="p-4" style="background-color: rgba(226, 226, 226, 0.342);">
+<body class="p-4">
   <header></header>
   <main class="main">
+    <h1 class="text-center w-50 mx-auto text-success"> <sup>Shoppy</sup><span
+        class="text-secondary"><sub>Doppy</sub></span></h1>
     <div class="search-field">
-      <div class="input-group w-50 mx-auto mt-4 mb-5">
+      <div class="input-group w-50 mx-auto mt-3 mb-5">
         <input type="text" class="form-control" placeholder="What do you want?" aria-label="Recipient's username"
           aria-describedby="button-addon2">
         <button onclick="loadProducts()" class="btn btn-outline-success" type="button" id="search-btn"><i
@@ -41,39 +43,29 @@
               <tr>
                 <th scope="col"></th>
                 <th scope="col"></th>
-                <th scope="col"></th>
-                <th scope="col"></th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <th>Total Added-Products:</th>
                 <td><span id="total-Products">0</span></td>
-                <td></td>
-                <td></td>
               </tr>
               <tr>
                 <th>Price:</th>
                 <td>$ <span id="price">0</span></td>
-                <td></td>
-                <td></td>
               </tr>
               <tr>
                 <th>Delivery-Charge:</th>
                 <td>$ <span id="delivery-charge">0</span></td>
-                <td></td>
-                <td></td>
               </tr>
               <tr>
                 <th>Total-Tax:</th>
                 <td>$ <span id="total-tax">0</span></td>
-                <td></td>
-                <td></td>
+
               </tr>
               <tr>
                 <th scope="row">Total:</th>
                 <td colspan="2">$ <span id="total">0</span></td>
-                <td></td>
               </tr>
             </tbody>
           </table>
