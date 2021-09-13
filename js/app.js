@@ -14,6 +14,100 @@ const showProducts = (products) => {
     const image = product.image;
     const div = document.createElement("div");
     div.classList.add("product");
+    const avgRating = product.rating.rate;
+    ratingHtml = '';
+    if (avgRating === 5) {
+      ratingHtml = `
+        <i class="fas fa-star"> &nbsp </i>
+        <i class="fas fa-star"> &nbsp </i> 
+        <i class="fas fa-star"> &nbsp </i>
+        <i class="fas fa-star"> &nbsp </i>
+        <i class="fas fa-star"> &nbsp </i>
+      `;
+    }
+    else if (avgRating < 5 && avgRating >= 4.5) {
+      ratingHtml = `
+        <i class="fas fa-star"> &nbsp </i>
+        <i class="fas fa-star"> &nbsp </i> 
+        <i class="fas fa-star"> &nbsp </i>
+        <i class="fas fa-star"> &nbsp </i>
+        <i class="fas fa-star-half-alt"> &nbsp </i>
+      `;
+    }
+
+    else if (avgRating < 4.5 && avgRating >= 4) {
+      ratingHtml = `
+        <i class="fas fa-star"> &nbsp </i>
+        <i class="fas fa-star"> &nbsp </i> 
+        <i class="fas fa-star"> &nbsp </i>
+        <i class="fas fa-star"> &nbsp </i>
+        <i class="far fa-star"> &nbsp </i>
+      `;
+    }
+    else if (avgRating < 4 && avgRating >= 3.5) {
+      ratingHtml = `
+        <i class="fas fa-star"> &nbsp </i>
+        <i class="fas fa-star"> &nbsp </i> 
+        <i class="fas fa-star"> &nbsp </i>
+        <i class="fas fa-star-half-alt"> &nbsp </i>
+        <i class="far fa-star"> &nbsp </i>
+      `;
+    }
+    else if (avgRating < 3.5 && avgRating >= 3) {
+      ratingHtml = `
+        <i class="fas fa-star"> &nbsp </i>
+        <i class="fas fa-star"> &nbsp </i> 
+        <i class="fas fa-star"> &nbsp </i>
+        <i class="far fa-star"> &nbsp </i>
+        <i class="far fa-star"> &nbsp </i>
+      `;
+    }
+    else if (avgRating < 3 && avgRating >= 2.5) {
+      ratingHtml = `
+        <i class="fas fa-star"> &nbsp </i>
+        <i class="fas fa-star"> &nbsp </i> 
+        <i class="fas fa-star-half-alt"> &nbsp </i>
+        <i class="far fa-star"> &nbsp </i>
+        <i class="far fa-star"> &nbsp </i>
+      `;
+    }
+    else if (avgRating < 2.5 && avgRating >= 2) {
+      ratingHtml = `
+        <i class="fas fa-star"> &nbsp </i>
+        <i class="fas fa-star"> &nbsp </i> 
+        <i class="far fa-star"> &nbsp </i>
+        <i class="far fa-star"> &nbsp </i>
+        <i class="far fa-star"> &nbsp </i>
+      `;
+    }
+    else if (avgRating < 2 && avgRating >= 1.5) {
+      ratingHtml = `
+        <i class="fas fa-star"> &nbsp </i>
+        <i class="fas fa-star-half-alt"> &nbsp </i> 
+        <i class="far fa-star"> &nbsp </i>
+        <i class="far fa-star"> &nbsp </i>
+        <i class="far fa-star"> &nbsp </i>
+      `;
+    }
+    else if (avgRating < 1.5 && avgRating >= 1) {
+      ratingHtml = `
+        <i class="fas fa-star"> &nbsp </i>
+        <i class="far fa-star"> &nbsp </i>
+        <i class="far fa-star"> &nbsp </i>
+        <i class="far fa-star"> &nbsp </i>
+        <i class="far fa-star"> &nbsp </i>
+      `;
+    }
+    else {
+      ratingHtml = `
+        <i class="far fa-star"> &nbsp </i>
+        <i class="far fa-star"> &nbsp </i>
+        <i class="far fa-star"> &nbsp </i>
+        <i class="far fa-star"> &nbsp </i>
+        <i class="far fa-star"> &nbsp </i>
+      `;
+    }
+
     div.innerHTML = `
     <div class="card h-100">
     <img style="height: 180px;" src=${image} class="card-img-top w-50 mx-auto mt-5" alt="Book image">
@@ -26,12 +120,22 @@ const showProducts = (products) => {
       <p class="card-text">
         <strong>Category:</strong>
         ${product.category} <br>
-        <strong>Price:</strong> $${product.price}<br>
-        <strong>Total Ratings:</strong> ${product.rating.count}<br>
-        <strong>Average Rating:</strong> ${product.rating.rate}<br>
+        <strong>Price:</strong> $${product.price}
+        <div class="d-flex justify-content-between align-items-center">
+          <div id="stars" class="d-flex align-items-center text-warning">
+            ${ratingHtml} 
+          </div>
+          <div class="d-flex align-items-center">
+            <span class="fs-3"> ${product.rating.rate}</span>
+            <sub class="text-secondary">/ 5</sub>
+          </div>
+        </div>
+        Total Ratings: ${product.rating.count} <br>
       </p>
-      <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="card-button buy-now btn btn-outline-dark">Add to cart</button>
-      <button id="details-btn" class="card-button btn btn-outline-dark">Details</button>
+      <div class="d-flex justify-content-between">
+      <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="card-button buy-now btn btn-outline-success">Add to cart</button>
+      <button id="details-btn" class="card-button btn btn-outline-warning">Details</button>
+      </div>
     </div>
   </div>`;
     document.getElementById("all-products").appendChild(div);
