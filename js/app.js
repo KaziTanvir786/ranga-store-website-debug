@@ -109,7 +109,7 @@ const showProducts = (products) => {
     }
 
     div.innerHTML = `
-    <div class="card h-100" style="background-color: whitesmoke;">
+    <div class="card h-100">
     <img style="height: 180px;" src=${image} class="card-img-top w-50 mx-auto mt-5" alt="Book image">
     <div class="card-body">
       <div>
@@ -135,13 +135,15 @@ const showProducts = (products) => {
       </div>
       <div class="d-flex justify-content-between mt-3">
       <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="card-button buy-now btn btn-outline-success">Add to cart</button>
-      <button id="details-btn" class="card-button btn btn-outline-warning">Details</button>
+      <button onclick="productDetails(${product.id})" id="details-btn" class="card-button btn btn-outline-warning" data-bs-toggle="modal"
+      data-bs-target="#details-modal">Details</button>
       </div>
     </div>
   </div>`;
     document.getElementById("all-products").appendChild(div);
   }
 };
+
 let count = 0;
 const addToCart = (id, price) => {
   count = count + 1;
@@ -194,4 +196,69 @@ const updateTotal = () => {
     parseFloat(document.getElementById('price').innerText) + parseFloat(document.getElementById('delivery-charge').innerText) +
     parseFloat(document.getElementById('total-tax').innerText);
   document.getElementById("total").innerText = grandTotal.toFixed(2);
+};
+
+const prepareBuyNowModal = () => {
+  const modalDiv = document.getElementById('modalDiv');
+  const totalPrice = document.getElementById('total').innerText;
+  if (parseFloat(totalPrice) === 0) {
+    modalDiv.innerHTML = `
+    <div class="modal-header">
+    <h5 class="modal-title fw-bold" id="exampleModalLabel"><i
+    class="fas fa-exclamation-triangle text-warning pe-3"></i>Warning</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  </div>
+  <div class="modal-body">
+    <h3>Please add something to the cart before clicking <span class="text-success">Buy Now</span>!</h3>
+  </div>
+  <div class="modal-footer d-flex justify-content-end">
+    <button type="button" class="btn btn-outline-dark px-5" data-bs-dismiss="modal">Ok</button>
+</div>
+  `;
+  }
+  else {
+    modalDiv.innerHTML = `
+    <div class="modal-header">
+    <h5 class="modal-title fw-bold" id="exampleModalLabel"><i class="far fa-check-circle text-warning pe-3"></i>Confirmation window</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  </div>
+  <div class="modal-body">
+    <p>Thanks for visit our e-commerce platform. Your orders are waiting for confirmation.</p>
+    <h5>Total Cost: <span class="fs-2 text-info">$${totalPrice}</span></h5>
+  </div>
+  <div class="modal-footer d-flex justify-content-end">
+    <button type="button" class="btn btn-outline-dark px-5" data-bs-dismiss="modal">Ok</button>
+</div>
+  `;
+  }
+}
+const productDetails = productId => {
+  const url = `https://raw.githubusercontent.com/ProgrammingHero1/ranga-store-api/main/ranga-api.json?fbclid=IwAR3uuQNUI7kuCXeYspQyu_x4WZM9PPFYY8sty5KRl1bViGZT4PWYdyBn3T4`;
+  fetch(url)
+    .then((response) => response.json())
+    .then((data) => loadData(data));
+  const loadData = products => {
+    const allProducts = products.map((pd) => pd);
+    // console.log(allProducts);
+    const detailsModalDiv = document.getElementById('details-modal-div');
+    for (const product of allProducts) {
+      if (product.id === productId) {
+        detailsModalDiv.innerHTML = `
+        <div class="modal-header">
+        <h5 class="modal-title fw-bold" id="exampleModalLabel">Product Information</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+      <div class="modal-body">
+      <img src=${product.image} class="d-flex card-img-top w-25 mx-auto mt-5" alt="Book image">
+        <h4 class="mt-4">${product.title}</h4>
+        <p class="text-secondary">${product.description}</p>
+        <h5>Best Price: <span class="fs-2 text-info">$${product.price}</span></h5>
+      </div>
+      <div class="modal-footer d-flex justify-content-end">
+      <button type="button" class="btn btn-outline-dark px-5" data-bs-dismiss="modal">Ok</button>
+    </div>
+  `;
+      }
+    }
+  }
 };

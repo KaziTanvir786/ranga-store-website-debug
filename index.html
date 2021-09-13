@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FakeStore</title>
+  <title>Shoppy Doppy</title>
   <link rel="stylesheet" href="./css/style.css" />
   <!-- Latest compiled and minified CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -17,7 +17,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet" />
 </head>
 
-<body class="p-4">
+<body class="p-4" style="background-color: whitesmoke;">
   <header></header>
   <main class="main">
     <h1 class="text-center w-50 mx-auto text-success"> <sup>Shoppy</sup><span
@@ -35,6 +35,25 @@
         <div id="all-products" class="row row-cols-1 row-cols-md-3 g-4">
         </div>
       </div>
+
+      <!-- Buy now Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div id="modalDiv" class="modal-content">
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Details Modal -->
+      <div class="modal fade" id="details-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div id="details-modal-div" class="modal-content">
+
+          </div>
+        </div>
+      </div>
+
       <div class="col-md-3 col-lg-3 col-sm-5 cart-main">
         <div class="cart" id="my-cart">
           <table class="table">
@@ -70,7 +89,8 @@
             </tbody>
           </table>
           <div class="parces text-center">
-            <button class="btn btn-outline-success text-center">Buy Now</button>
+            <button onclick="prepareBuyNowModal()" class="btn btn-outline-success text-center" data-bs-toggle="modal"
+              data-bs-target="#exampleModal">Buy Now</button>
           </div>
         </div>
       </div>
